@@ -1,47 +1,50 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue'
+
+// attribute binding
+const titleClass = ref('title')
+
+// event binding
+const count = ref(0)
+function increment() {
+  count.value++
+}
+
+// form binding
+const text = ref('')
+function onInput(e) {
+  text.value = e.target.value
+}
+
+// conditional binding
+const awesome = ref(true)
+function toggle() {
+  // ...
+}
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <h1 :class="titleClass"> Attribute binding: Make me red</h1>	<p></p>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+  <h1> Event binding </h1>	<p></p>
+  <button @click="increment">count is: {{ count }}</button>	<p></p>
 
-  <main>
-    <TheWelcome />
-  </main>
+  <h1> Form binding </h1>	<p></p>
+  <input :value="text" @input="onInput" placeholder="Type here">	<p></p>
+  <p>{{ text }}</p>	<p></p>
+
+  <h1> Conditional binding</h1>	<p></p>
+  <button @click="awesome = !awesome">toggle</button>	<p></p>
+  <h1 v-if="awesome">Vue is awesome!</h1>
+  <h1 v-else>Oh no 😢</h1>
+
+
+
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+<style>
+.title {
+  color: red;
 }
 </style>
